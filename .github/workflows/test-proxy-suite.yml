@@ -20,9 +20,9 @@ jobs:
       run: |
         cd tests && npm run test
 
-  services:
-    pi:
-      image: ghcr.io/${{ github.repository_owner }}/dockerpi:latest
-      ports:
-        - 5022:5022
-      options: pi2
+services:
+  pi:
+    image: ghcr.io/${{ github.repository_owner }}/dockerpi:latest
+    ports:
+      - 5022:5022
+    options: pi2
