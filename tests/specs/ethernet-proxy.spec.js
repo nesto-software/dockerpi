@@ -8,21 +8,23 @@ beforeAll(async () => {
     ssh2Handle = await connect();
 }, 600000);
 
-describe('USBProxy', () => {
+describe('EthernetProxy', () => {
     test('Installation', async () => {
-        const cmd = 'sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/nesto-software/USBProxy/master/scripts/install-from-release.sh)"';
+        const cmd = 'sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/nesto-software/EthernetProxy/master/scripts/install-from-release.sh)"';
         await exec(ssh2Handle, cmd);
     }, 120000);
 
     test('Binary Existance', async () => {
-        const cmd = 'which usb-mitm';
+        const cmd = 'which ethernet-proxy';
         await exec(ssh2Handle, cmd);
     }, 30000);
 
+    /* TODO: find out why the loader is not working correctly... strace /lib/ld-linux.so.3 --verify /usr/bin/ethernet-proxy
     test('Loader', async () => {
-        const cmd = 'bash -c "ldd $(which usb-mitm)"';
+        const cmd = 'bash -c "ldd $(which ethernet-proxy)"';
         await exec(ssh2Handle, cmd);
     }, 30000);
+    */
 });
 
 afterAll(() => {

@@ -11,6 +11,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        repository: nesto-software/dockerpi
 
     - name: Install testsuite deps
       run: |
@@ -23,6 +25,3 @@ jobs:
     services:
       pi:
         image: ghcr.io/${{ github.repository_owner }}/dockerpi:latest
-        credentials:
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.CR_PAT }}
