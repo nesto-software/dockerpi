@@ -1,0 +1,38 @@
+name: build-container
+on:
+  push:
+    paths:
+      - '.devcontainer/**'
+      - '.github/workflows/build-container.yml'
+    branches: master
+  workflow_dispatch:
+
+env:
+  FILESYSTEM_IMAGE_CHECKSUM: 0598c22d77eb319398ec99aa8d5229366266f79616b8b7ad17277d9a28feb23f
+  FILESYSTEM_IMAGE_URL: https://github.com/nesto-software/dockerpi/releases/download/2021-05-07/2021-05-07-raspios-buster-armhf-lite.zip
+
+jobs:
+  build-container:
+    runs-on: 'ubuntu-20.04'
+    steps:
+      - 
+        name: Login to Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      -
+        name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/dockerpi:latest
+          build-args: FILESYSTEM_IMAGE_CHECKSUM=${{ env.FILESYSTEM_IMAGE_CHECKSUM }},FILESYSTEM_IMAGE_URL=${{ env.FILESYSTEM_IMAGE_URL }}
