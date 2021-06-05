@@ -1,0 +1,28 @@
+name: test-proxy-suite
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Build nesto-usbproxy debian package
+    runs-on: ubuntu-latest
+    container:
+      image: node:14.17.0
+
+  services:
+    pi:
+      image: ghcr.io/${{ github.repository_owner }}/dockerpi:latest
+      ports:
+        - 5022:5022
+      options: pi2
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install testsuite deps
+      run: |
+        cd tests && npm install
+
+    - name: Run testsuite
+      run: |
+        cd tests && npm run test
