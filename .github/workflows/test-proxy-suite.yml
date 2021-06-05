@@ -4,7 +4,7 @@ on:
 
 jobs:
   test:
-    name: Build nesto-usbproxy debian package
+    name: Test installation and lld
     runs-on: ubuntu-latest
     container:
       image: node:14.17.0
@@ -26,3 +26,6 @@ jobs:
         ports:
           - 5022:5022
         options: pi2
+        credentials:
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
