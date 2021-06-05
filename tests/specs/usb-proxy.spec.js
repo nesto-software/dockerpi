@@ -2,12 +2,10 @@ const { waitForShh, connect, exec } = require("../utils");
 
 let ssh2Handle;
 
-jest.disableAutomock();
-
 beforeAll(async () => {
     await waitForShh();
     ssh2Handle = await connect();
-}, 60000);
+}, 600000);
 
 describe('USBProxy', () => {
     test('Installation', async () => {
@@ -22,5 +20,7 @@ describe('USBProxy', () => {
 });
 
 afterAll(() => {
-    ssh2Handle.end();
+    if (ssh2Handle) {
+        ssh2Handle.end();
+    }
 });
