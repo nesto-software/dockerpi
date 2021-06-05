@@ -67,6 +67,12 @@ if [ "${kernel_pattern}" ] && [ "${dtb_pattern}" ]; then
   mkdir -p "${fat_folder}"
   fatcat -x "${fat_folder}" "${fat_path}"
 
+  # add ssh file to boot folder to enable sshd on startup
+  # note: already included in the image via enable-ssh-for-image.sh
+  #echo "Add /boot/ssh to enable sshd on startup"
+  #touch ssh
+  #mcopy -i "${fat_path}" ssh ::ssh
+
   root=/dev/mmcblk0p2
 
   echo "Searching for kernel='${kernel_pattern}'"

@@ -1,1 +1,4 @@
 *.swp
+
+tests/node_modules
+raspios/
