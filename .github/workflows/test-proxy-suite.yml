@@ -2,9 +2,14 @@ name: test-proxy-suite
 on:
   workflow_dispatch:
 
+defaults:
+  services:
+    pi:
+      image: ghcr.io/${{ github.repository_owner }}/dockerpi:latest
+
 jobs:
-  test:
-    name: Test installation and ldd
+  test-usbproxy:
+    name: Run tests for USBProxy
     runs-on: ubuntu-latest
     container:
       image: node:14.17.0
@@ -20,8 +25,23 @@ jobs:
 
     - name: Run testsuite
       run: |
-        cd tests && npm run test
+        cd tests && npm run test -- -t USBProxy
 
-    services:
-      pi:
-        image: ghcr.io/${{ github.repository_owner }}/dockerpi:latest
+  test-ethernet-proxy:
+    name: Run tests for EthernetProxy
+    runs-on: ubuntu-latest
+    container:
+      image: node:14.17.0
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: nesto-software/dockerpi
+
+    - name: Install testsuite deps
+      run: |
+        cd tests && npm install
+
+    - name: Run testsuite
+      run: |
+        cd tests && npm run test -- -t EthernetProxy
