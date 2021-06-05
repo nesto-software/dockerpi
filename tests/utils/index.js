@@ -23,7 +23,6 @@ exports.connect = async function () {
   ssh.on('error', (err) => {
       ssh.end();
       console.error(err);
-      process.exit(1);
   })
 
   // wait until connection is ready
