@@ -4,6 +4,7 @@ let ssh2Handle;
 
 beforeAll(async () => {
     await waitForShh();
+    console.log("Connection to virtual pi established.");
     ssh2Handle = await connect();
 }, 600000);
 

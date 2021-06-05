@@ -4,7 +4,7 @@ on:
 
 jobs:
   test:
-    name: Test installation and lld
+    name: Test installation and ldd
     runs-on: ubuntu-latest
     container:
       image: node:14.17.0
@@ -23,8 +23,6 @@ jobs:
     services:
       pi:
         image: ghcr.io/${{ github.repository_owner }}/dockerpi:latest
-        ports:
-          - 5022:5022
         credentials:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.CR_PAT }}
