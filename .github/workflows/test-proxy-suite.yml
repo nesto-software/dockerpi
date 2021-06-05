@@ -2,17 +2,16 @@ name: test-proxy-suite
 on:
   workflow_dispatch:
 
-defaults:
-  services:
-    pi:
-      image: ghcr.io/${{ github.repository_owner }}/dockerpi:latest
-
 jobs:
   test-usbproxy:
     name: Run tests for USBProxy
     runs-on: ubuntu-latest
     container:
       image: node:14.17.0
+    
+    services:
+      pi:
+        image: ghcr.io/${{ github.repository_owner }}/dockerpi:latest
 
     steps:
     - uses: actions/checkout@v2
@@ -32,6 +31,10 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node:14.17.0
+
+    services:
+      pi:
+        image: ghcr.io/${{ github.repository_owner }}/dockerpi:latest
 
     steps:
     - uses: actions/checkout@v2
