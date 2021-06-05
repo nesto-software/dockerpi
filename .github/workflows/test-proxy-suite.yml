@@ -16,7 +16,7 @@ jobs:
         - 5022:5022
       options: pi2
 
-    steps:
+  steps:
     - uses: actions/checkout@v2
 
     - name: Install testsuite deps
