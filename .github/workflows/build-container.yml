@@ -8,6 +8,7 @@ on:
   workflow_dispatch:
 
 env:
+  DOCKERPI_IMAGE_VERSION: "2021-05-07"
   FILESYSTEM_IMAGE_CHECKSUM: 0598c22d77eb319398ec99aa8d5229366266f79616b8b7ad17277d9a28feb23f
   FILESYSTEM_IMAGE_URL: https://github.com/nesto-software/dockerpi/releases/download/2021-05-07/2021-05-07-raspios-buster-armhf-lite.zip
 
@@ -34,7 +35,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/dockerpi:latest
+          tags: ghcr.io/${{ github.repository_owner }}/dockerpi:latest,ghcr.io/${{ github.repository_owner }}/dockerpi:{{ env.DOCKERPI_IMAGE_VERSION }}
           build-args: |
             FILESYSTEM_IMAGE_CHECKSUM=${{ env.FILESYSTEM_IMAGE_CHECKSUM }}
             FILESYSTEM_IMAGE_URL=${{ env.FILESYSTEM_IMAGE_URL }}
