@@ -13,7 +13,7 @@ describe('SerialProxy', () => {
     test('Installation', async () => {
         const cmd = 'sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/nesto-software/SerialProxy/master/scripts/install-from-release.sh)"';
         await exec(ssh2Handle, cmd);
-    }, 200000);
+    }, 600000);
 
     test('Binary Existance', async () => {
         const cmd = 'which sersniff';
