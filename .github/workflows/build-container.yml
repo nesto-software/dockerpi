@@ -35,7 +35,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/dockerpi:latest,ghcr.io/${{ github.repository_owner }}/dockerpi:{{ env.DOCKERPI_IMAGE_VERSION }}
+          tags: ghcr.io/${{ github.repository_owner }}/dockerpi:latest,ghcr.io/${{ github.repository_owner }}/dockerpi:${{ env.DOCKERPI_IMAGE_VERSION }}
           build-args: |
             FILESYSTEM_IMAGE_CHECKSUM=${{ env.FILESYSTEM_IMAGE_CHECKSUM }}
             FILESYSTEM_IMAGE_URL=${{ env.FILESYSTEM_IMAGE_URL }}
