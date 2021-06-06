@@ -18,6 +18,7 @@ exports.connect = async function () {
       port: process.env.SSH_PORT, 
       password: process.env.SSH_PASSWD, 
       user: process.env.SSH_USER,
+      readyTimeout: 60000,
   })
 
   ssh.on('error', (err) => {
