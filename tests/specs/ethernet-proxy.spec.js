@@ -11,7 +11,7 @@ beforeAll(async () => {
 
 describe('EthernetProxy', () => {
     test('Installation', async () => {
-        const cmd = 'sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/nesto-software/EthernetProxy/master/scripts/install-from-release.sh)"';
+        const cmd = 'sudo bash -c "while sudo fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do sleep 1; done; $(curl -fsSL https://raw.githubusercontent.com/nesto-software/EthernetProxy/master/scripts/install-from-release.sh)"';
         await exec(ssh2Handle, cmd);
     }, 600000);
 
